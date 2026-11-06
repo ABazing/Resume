@@ -1,0 +1,245 @@
+/* =====================================================================
+   RESUME STYLES
+
+   Edit the SETTINGS block below to change fonts, sizes, and colors
+   across the whole resume. Everything under it reads from these values,
+   so you rarely need to touch the rest of the file.
+   ===================================================================== */
+
+:root{
+  /* ---------- SETTINGS: fonts ---------- */
+  --font-heading: Georgia, Georgia, Georgia;           /* name, section titles, job titles, dates, tags */
+  --font-body:    "Times New Roman", Times New Roman, Times New Roman;        /* summary, bullets, skills, education details */
+
+  /* ---------- SETTINGS: on-screen text sizes ---------- */
+  --size-body:      14.5px;  /* bullets, summary */
+  --size-name:      64px;    /* your name */
+  --size-title:     20px;    /* line under your name */
+  --size-section:   21px;    /* "Professional Experience", etc. */
+  --size-job:       19px;    /* job / project titles */
+  --size-date:      15px;
+  --size-small:     13.5px;  /* org line, sidebar text */
+
+  /* ---------- SETTINGS: printed (PDF) text sizes ---------- */
+  --print-body:     10pt;
+  --print-name:     30pt;
+  --print-title:    11pt;
+  --print-section:  12.5pt;
+  --print-job:      11pt;
+  --print-date:     9.5pt;
+  --print-small:    9pt;
+  /* page margins: see @page in the PRINT section (CSS can't use variables there) */
+
+  /* ---------- SETTINGS: dark mode colors ---------- */
+  --dark-accent:  #4a86ff;            /* blue highlight color */
+  --dark-text:    #fff;
+  --dark-muted:   #c3c9d4;            /* secondary text */
+  --dark-sheet:   rgba(4,7,14,.82);   /* resume panel; last number = opacity */
+  --dark-shade:   rgba(0,0,0,.45);    /* darkening over the video */
+
+  /* ---------- SETTINGS: light mode colors ---------- */
+  --light-accent: #1f4fbf;
+  --light-text:   #0a0f1c;
+  --light-muted:  #3d4555;
+  --light-sheet:  rgba(255,255,255,.88);
+  --light-shade:  rgba(238,241,246,.35);
+
+  /* ---------- SETTINGS: print colors ---------- */
+  --print-accent: #1f4fbf;
+  --print-text:   #222;
+
+  /* ---------- SETTINGS: layout ---------- */
+  --page-width:    11.5in;  /* on-screen only; print always uses the letter page */
+  --sidebar-width: 2.9in;
+  --photo-width:   2in;     /* square portrait in the sidebar */
+}
+
+/* =====================================================================
+   THEME WIRING (uses the settings above; no need to edit)
+   ===================================================================== */
+:root{
+  --line:rgba(255,255,255,.2);
+  --line-strong:rgba(255,255,255,.45);
+  --text:var(--dark-text);
+  --inverse:#000;
+  --muted:var(--dark-muted);
+  --accent:var(--dark-accent);
+  --page:#000;
+  --sheet:var(--dark-sheet);
+  --shade:var(--dark-shade);
+  --btn-bg:rgba(0,0,0,.4);
+  --shadow:0 30px 80px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+/* light theme: set by the toggle, or by the OS when no choice is saved */
+:root[data-theme="light"]{
+  --line:rgba(10,20,40,.16);
+  --line-strong:rgba(10,20,40,.4);
+  --text:var(--light-text);
+  --inverse:#fff;
+  --muted:var(--light-muted);
+  --accent:var(--light-accent);
+  --page:#eef1f6;
+  --sheet:var(--light-sheet);
+  --shade:var(--light-shade);
+  --btn-bg:rgba(255,255,255,.6);
+  --shadow:0 30px 80px rgba(10,20,40,.35);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --line:rgba(10,20,40,.16);
+    --line-strong:rgba(10,20,40,.4);
+    --text:var(--light-text);
+    --inverse:#fff;
+    --muted:var(--light-muted);
+    --accent:var(--light-accent);
+    --page:#eef1f6;
+    --sheet:var(--light-sheet);
+    --shade:var(--light-shade);
+    --btn-bg:rgba(255,255,255,.6);
+    --shadow:0 30px 80px rgba(10,20,40,.35);
+    color-scheme:light;
+  }
+}
+
+/* =====================================================================
+   BASE
+   ===================================================================== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--page);color:var(--text);transition:background .3s,color .3s;font-family:var(--font-body);font-size:var(--size-body);line-height:1.5;-webkit-font-smoothing:antialiased;padding:32px 16px 60px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+a{color:inherit;text-decoration:none}
+
+/* video backdrop behind the sheet */
+.bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.bg-shade{position:fixed;inset:0;z-index:-1;background:var(--shade);transition:background .3s}
+
+/* toolbar above the sheet */
+.tools{max-width:var(--page-width);margin:0 auto 14px;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-heading);font-weight:600;letter-spacing:.24em;text-transform:uppercase;font-size:15px}
+.tools .mark{display:flex;align-items:center;gap:10px}
+.tools svg{width:20px;height:20px}
+.tools .actions{display:flex;gap:8px}
+.tools button{font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text);background:var(--btn-bg);border:1px solid var(--text);padding:5px 12px;cursor:pointer;transition:background .2s,color .2s}
+.tools button:hover{background:var(--text);color:var(--inverse)}
+.tools #themeToggle{display:flex;align-items:center;gap:6px;padding:5px 10px}
+.tools #themeToggle svg{width:12px;height:12px}
+
+.sheet{max-width:var(--page-width);margin:0 auto;background:var(--sheet);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);padding:.55in .6in .6in;box-shadow:var(--shadow);transition:background .3s}
+
+/* =====================================================================
+   HEADER
+   ===================================================================== */
+.head{border-bottom:3px solid var(--accent);padding-bottom:18px;margin-bottom:22px}
+.eyebrow{font-family:var(--font-heading);font-weight:600;font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.head h1{font-family:var(--font-heading);font-weight:800;text-transform:uppercase;font-size:var(--size-name);line-height:.9;letter-spacing:.01em;margin:6px 0 8px}
+.head .title{font-family:var(--font-heading);font-weight:500;font-size:var(--size-title);letter-spacing:.06em;text-transform:uppercase}
+.contact{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:12px;color:var(--muted);font-size:14px}
+.contact a:hover{color:var(--text);text-decoration:underline}
+.flags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.flags span{font-family:var(--font-heading);font-weight:600;font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line-strong);padding:2px 12px}
+
+/* =====================================================================
+   LAYOUT & SECTIONS
+   ===================================================================== */
+.cols{display:grid;grid-template-columns:1fr var(--sidebar-width);gap:0 .35in}
+h2{display:flex;align-items:baseline;gap:10px;font-family:var(--font-heading);font-weight:700;text-transform:uppercase;font-size:var(--size-section);letter-spacing:.08em;border-bottom:1px solid var(--line-strong);padding-bottom:3px;margin:22px 0 10px}
+h2 .n{font-size:14px;font-weight:600;letter-spacing:.14em;color:var(--accent)}
+.main>h2:first-child,.side>h2:first-child{margin-top:0}
+p.sum{color:var(--muted)}
+
+/* job & project entries */
+.entry{margin-bottom:13px}
+.entry .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.entry h3{font-family:var(--font-heading);font-weight:700;font-size:var(--size-job);letter-spacing:0;text-transform:uppercase;line-height:1.2}
+.entry .date{font-family:var(--font-heading);font-weight:600;font-size:var(--size-date);letter-spacing:.04em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.entry .org{color:var(--accent);font-weight:600;font-size:var(--size-small);margin-bottom:3px}
+ul{list-style:none}
+li{position:relative;padding-left:16px;color:var(--muted);margin-bottom:3px}
+li::before{content:"";position:absolute;left:1px;top:.55em;width:6px;height:6px;border:1.5px solid var(--accent);transform:rotate(45deg)}
+.sub{margin:-4px 0 10px;color:var(--muted);font-size:13px;font-style:italic}
+
+/* sidebar */
+.side{border-left:1px solid var(--line);padding-left:.3in}
+.side h2{font-size:calc(var(--size-section) * .78);letter-spacing:.03em;white-space:nowrap}
+.side>.photo+h2{margin-top:0}
+/* square portrait at the top of the sidebar */
+.photo{display:block;width:var(--photo-width);max-width:100%;aspect-ratio:1;object-fit:cover;object-position:center 30%;border:2px solid var(--accent);box-shadow:0 0 0 5px var(--sheet),0 0 0 6px var(--line-strong);margin:4px auto 26px}
+.side dt{font-family:var(--font-heading);font-weight:600;font-size:15px;letter-spacing:.02em;white-space:nowrap;text-transform:uppercase;margin-top:8px}
+.side dd{color:var(--muted);font-size:var(--size-small);line-height:1.4}
+/* flex column reorders each entry to: title, school, dates, description */
+.side .edu{margin-bottom:10px;display:flex;flex-direction:column}
+.side .edu .when{order:1}
+.side .edu span:nth-of-type(n+3){order:2}
+.side .edu b{order:-1;display:block;font-family:var(--font-heading);font-weight:700;font-size:16.5px;letter-spacing:0;text-transform:uppercase;line-height:1.15}
+.side .edu span{display:block;color:var(--muted);font-size:13px;line-height:1.35}
+.side .edu .when{color:var(--accent);font-family:var(--font-heading);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:11px;margin:2px 0 1px}
+.side li{padding-left:14px;margin-bottom:2px;font-size:var(--size-small)}
+
+/* =====================================================================
+   SCROLL BUILD-IN: lines fade and slide up as they enter the screen
+   (the script only turns this on when the viewer allows motion)
+   ===================================================================== */
+.animate .build{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.animate .build.in{opacity:1;transform:none}
+/* section underlines draw in from the left */
+.animate h2.build{border-bottom-color:transparent;background:linear-gradient(var(--line-strong),var(--line-strong)) left bottom/0 1px no-repeat;transition:opacity .55s ease,transform .55s ease,background-size .9s ease .15s}
+.animate h2.build.in{background-size:100% 1px}
+
+/* =====================================================================
+   PHONE / NARROW SCREENS
+   ===================================================================== */
+@media(max-width:720px){
+  body{padding:20px 12px 40px}
+  .sheet{padding:28px 20px}
+  .head h1{font-size:46px}
+  .cols{grid-template-columns:1fr}
+  .side{border-left:0;padding-left:0;margin-top:6px}
+  .entry .top{flex-direction:column;gap:0}
+}
+
+/* =====================================================================
+   PRINT: a clean two-page (front & back) paper resume
+   ===================================================================== */
+@page{size:letter;margin:.45in .5in}
+@media print{
+  body{background:#fff;color:#000;padding:0;font-size:var(--print-body);line-height:1.42}
+  .bg-video,.bg-shade,.tools{display:none}
+  .animate .build{opacity:1;transform:none;transition:none}
+  .animate h2.build{background:none;border-bottom-color:#999}
+  .sheet{max-width:none;border:0;background:#fff;padding:0;box-shadow:none;backdrop-filter:none}
+
+  .head{padding-bottom:10px;margin-bottom:14px;border-color:var(--print-accent)}
+  .eyebrow{font-size:8pt}
+  .head h1{font-size:var(--print-name);margin:2px 0 4px}
+  .head .title{font-size:var(--print-title)}
+  .contact{font-size:var(--print-small);margin-top:6px}
+  .flags{margin-top:7px}
+  .flags span{font-size:8pt;padding:1px 9px}
+
+  .cols{grid-template-columns:1fr 2.3in;gap:0 .3in}
+  h2{font-size:var(--print-section);margin:14px 0 6px;break-after:avoid}
+  h2 .n{font-size:9pt}
+  .entry{margin-bottom:9px;break-inside:avoid}
+  .entry h3{font-size:var(--print-job)}
+  .entry .date{font-size:var(--print-date)}
+  .entry .org{font-size:var(--print-small);margin-bottom:2px}
+  li{margin-bottom:1px}
+  .sub{font-size:8.5pt;margin:-2px 0 6px}
+
+  .side{padding-left:.22in}
+  .side h2{font-size:10pt;letter-spacing:.02em}
+  .photo{width:1.35in;margin:0 auto 12px;border-color:var(--print-accent);box-shadow:none}
+  .side dt{font-size:9pt;margin-top:6px}
+  .side dd,.side li{font-size:var(--print-small)}
+  .side .edu{margin-bottom:7px;break-inside:avoid}
+  .side .edu b{font-size:10.5pt}
+  .side .edu span{font-size:8.75pt}
+  .side .edu .when{font-size:7pt;margin:1px 0 0}
+
+  .eyebrow,h2 .n,.entry .org,.side .edu .when{color:var(--print-accent)}
+  .entry .date{color:var(--print-accent)}
+  .contact,p.sum,li,.side dd,.side .edu span,.sub{color:var(--print-text)}
+  .flags span,h2,.side{border-color:#999}
+  li::before{border-color:var(--print-accent)}
+}
