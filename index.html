@@ -37,6 +37,13 @@
   .side ul li{margin-bottom:3px}
   .side ul li:last-child{margin-bottom:0}
 }
+/* wider main column on screen so both columns end at a similar height */
+:root{--sidebar-width:2.4in}
+@media print{
+  :root{--print-body:9.25pt;--print-small:8.5pt}
+  body{line-height:1.3}
+  .entry{margin-bottom:5px}
+}
 </style>
 </head>
 <body>
@@ -106,35 +113,43 @@
       <h2><span class="n">03</span>Software &amp; Projects</h2>
       <div class="entry">
         <div class="top"><h3>Personnel &amp; Readiness Dashboard</h3><span class="date">Jun 2025 – Present</span></div>
-        <div class="org">Palantir Envision &middot; Power Apps &middot;TypeScript</div>
+        <div class="org">Palantir Envision &middot; Power Apps &middot; TypeScript &middot; Data Visualization &middot; Data Validation &middot; Access Controls</div>
         <ul>
-          <li>Engineered a full-stack administrative platform and data visualization dashboard to manage unit personnel data, streamline duty roster tracking, and monitor real-time training readiness metrics.</li>
-          <li>Automated data ingestion, validation rules, and access controls across high-clearance military records, significantly reducing administrative reporting time and maintaining data integrity for unit leadership.</li>
+          <li>Built an administrative platform and dashboard that lets unit leadership manage personnel data, track duty rosters, and monitor training readiness in real time.</li>
+          <li>Automated how data is loaded and checked, and who can see it, across sensitive military records, significantly reducing administrative reporting time and keeping the information accurate for unit leadership.</li>
         </ul>
       </div>
       <div class="entry">
-        <div class="top"><h3>Site Read File v3.0</h3><span class="date">Oct 2026 - Present</span></div>
-        <div class="org">Microsoft Access &middot; VBA</div>
+        <div class="top"><h3>Crew Scheduling &amp; Staffing Platform</h3><span class="date">Oct 2026 – Present</span></div>
+        <div class="org">Vanilla JavaScript &middot; HTML5/CSS3 &middot; SharePoint REST API &middot; JSON &middot; Role-Based Access</div>
         <ul>
-          <li>Replaced manual tracking with structured data entry, lookup, and reporting for recurring crew tasks (Agile methodologies).</li>
-          <li>Designed relational tables, validated input forms, and queries that generate on-demand status reports for users, iterating on operator feedback through three major versions.</li>
+          <li>Built a scheduling web app that replaced spreadsheets for planning monthly crew duty calendars, automatically handling shift rotations, certifications, holidays, and coverage inside SharePoint.</li>
+          <li>Added secure SharePoint data storage, role-based view and edit access, and an audit view that flags under- and over-staffed shifts, with accessibility modes for all users.</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div class="top"><h3>Site Read File</h3><span class="date">Oct 2026 - Present</span></div>
+        <div class="org">Microsoft Access &middot; VBA &middot; Relational Database &middot; Queries &middot; Agile</div>
+        <ul>
+          <li>Replaced manual tracking with a structured system for data entry, lookup, and reporting on recurring crew tasks, using Agile methods.</li>
+          <li>Designed the database tables, validated input forms, and reports that produce on-demand status updates for users, refining it through three major versions based on operator feedback.</li>
         </ul>
       </div>
       <div class="entry">
         <div class="top"><h3>Generative AI Content Generator &amp; SharePoint Stress Test</h3><span class="date">Apr 2025 – Jul 2025</span></div>
-        <div class="org">Python &middot; Local LLM (LM Studio) &middot; REST API &middot; JSON &middot; SharePoint</div>
+        <div class="org">Python &middot; Local LLM (LM Studio) &middot; REST API &middot; JSON &middot; SharePoint &middot; Prompt Engineering &middot; Regex &middot; Output Validation</div>
         <ul>
-          <li>Developed to quickly stress test and support the complete rework of a website: built a pipeline that prompts a locally hosted LLM through a REST API to generate structured news, announcement, leadership-message, and knowledge-base articles, with retry handling, regex parsing, and automatic rejection of incomplete or placeholder output.</li>
-          <li>Designed the generator to scale to any data volume by article type, category, and count, with randomized authors, dates, audiences, and view counts, and tracked completion against targets in a statistics dashboard; the test data stress tested the SharePoint article-display backend and helped ensure a successful launch.</li>
+          <li>Developed to quickly stress test and support the complete rework of a website: built a tool that uses an AI language model running on a local computer to generate news, announcement, leadership-message, and knowledge-base articles, retrying on errors and automatically rejecting incomplete or placeholder results.</li>
+          <li>Designed it to scale to any amount of data by article type, category, and count, with randomized authors, dates, audiences, and view counts, and tracked progress against targets in a statistics dashboard; the test data stress tested the SharePoint article display and helped ensure a successful launch.</li>
         </ul>
       </div>
       <div class="entry">
         <div class="top"><h3>Open-Source Community Software</h3><span class="date">2018 - Present</span></div>
-        <div class="org">C# &middot; Lua &middot; Python &middot; Local LLM &middot; JSON &middot; GitHub &middot; OOP</div>
+        <div class="org">C# &middot; Lua &middot; Python &middot; Local LLM &middot; JSON &middot; GitHub &middot; Git &middot; Pull Requests &middot; OOP</div>
         <ul>
-          <li>Developed, published, and maintained open-source software and gaming modifications serving over 4.8 million unique user.</li>
-          <li>Managed distributed Git workflows, processing community pull requests, resolving bug reports, and maintaining long-term compatibility across hundreds of updates.</li>
-          <li>Built tools that use a local LLM to batch-rewrite game dialogue into distinct character personalities, preserving embedded game control tags, enforcing word-count limits through validation and retries, and running concurrent requests that scale with available hardware, with fallback to the original text on failure.</li>
+          <li>Developed, published, and maintained open-source software and game modifications used by over 4.8 million unique users.</li>
+          <li>Managed community contributions through Git, reviewing pull requests, fixing reported bugs, and keeping everything compatible across hundreds of updates.</li>
+          <li>Built tools that use an AI language model running on a local computer to rewrite large batches of game dialogue in distinct character personalities, preserving the game's embedded control codes, checking each result against word-count limits and retrying when needed, and running requests in parallel that scale with available hardware, with fallback to the original text on failure.</li>
         </ul>
       </div>
     </div>
